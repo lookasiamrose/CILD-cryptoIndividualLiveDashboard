@@ -16,6 +16,8 @@ private:
     QString method;
     bool standarizationAllowed;
     bool invertedAllowed;
+
+    int objectCount;
 private:
     void setupDatabase();
     QString prepareSQLColumns(QStringList columns);
@@ -32,9 +34,12 @@ private:
 public:
     Printer(QObject *parent = nullptr);
     Printer(QString choice, QObject *parent = nullptr);
+
+    void addObjectCounts(int count);
+
     ~Printer();
 signals:
-
+    void pleaseEnd();
 public slots:
     void getResult(QList< QList< QMap<QString, QVariant> > >* result, QString name);
 };

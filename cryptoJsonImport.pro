@@ -16,13 +16,13 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += main.cpp \
-    coin.cpp \
     jsonprocessor.cpp \
     printer.cpp \
-    rawprocessor.cpp
+    rawprocessor.cpp \
+    app.cpp
 
 HEADERS += \
-    coin.h \
     jsonprocessor.h \
     printer.h \
-    rawprocessor.h
+    rawprocessor.h \
+    app.h

@@ -3,6 +3,10 @@
 #include <QSqlRecord>
 #include <QSqlError>
 
+void Printer::addObjectCounts(int count)
+{
+    objectCount += count;
+}
 void Printer::standardPairing(QString& value)
 {
     if(standarizationAllowed){
@@ -42,6 +46,8 @@ void Printer::standardKeys(QList< QMap<QString, QVariant> >* list,  QString name
 }
 Printer::Printer(QObject *parent) : QObject(parent)
 {
+    objectCount = 0;
+
     invertedAllowed = false;
     standarizationAllowed = false;
     setupDatabase();
@@ -98,6 +104,13 @@ void Printer::getResult(QList< QList< QMap<QString, QVariant> > >* result, QStri
         }else{
             qDebug()<<database.lastError().text();
         }
+    }
+    if(objectCount > 1)
+    {
+            qDebug()<<"Data batches to print: "<<objectCount;
+            objectCount--;
+    }else{
+            emit pleaseEnd();
     }
 }
 void Printer::printListFor(QList< QMap<QString, QVariant> >* list,  QString name)
