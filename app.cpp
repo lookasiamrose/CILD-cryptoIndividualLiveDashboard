@@ -99,6 +99,8 @@ void App::run()
     add_rawProcesses(&rawGo_STRAT);
     add_rawProcesses(&rawGo_BTC);
 
+
+
     qDebug()<<"Type 's' for a single all-refresh, type 'a' for an auto-refresh engine start.";
     QTextStream s(stdin);
     option = s.readLine().at(0);
