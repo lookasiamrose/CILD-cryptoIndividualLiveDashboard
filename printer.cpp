@@ -107,8 +107,8 @@ void Printer::getResult(QList< QList< QMap<QString, QVariant> > >* result, QStri
     }
     if(objectCount > 1)
     {
-            qDebug()<<"Data batches to print: "<<objectCount;
             objectCount--;
+            qDebug()<<"[DEBUG] "<<"Data batches to print: "<<objectCount;
     }else{
             emit pleaseEnd();
     }

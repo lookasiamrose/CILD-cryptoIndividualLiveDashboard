@@ -2,6 +2,7 @@
 #define APP_H
 
 #include <QObject>
+#include <QTime>
 #include <QtNetwork>
 #include <QVariant>
 #include <QMap>
@@ -13,23 +14,34 @@ class App : public QObject
 {
     Q_OBJECT
 private:
+    QTimer* timer;
+    QChar option;
+
     JsonProcessor jsoner;
     Printer* printer;
 
     static QList< QMap<QString, QVariant> (*) (void)> jsonOldProcesses;
     static int jsonOldCount;
+    int jsonOldIndex;
+
     static QList< QList< QMap<QString, QString> > > rawProcesses;
     static QList< RawProcessor* > rawProcessesToDelete;
     static int rawCount;
+    int rawIndex;
+
+    int totalIndex;
+    int totalCount;
 public:
     explicit App(QObject *parent = nullptr);
-    ~App() { delete printer; for(int i=0;i<rawProcessesToDelete.size();i++) delete rawProcessesToDelete[i]; }
+    ~App() { delete printer; for(int i=0;i<rawProcessesToDelete.size();i++) delete rawProcessesToDelete[i]; delete timer; }
 signals:
     void finished();
 
 public slots:
     void run();
     void end();
+
+    void timeUp();
 private:
     static QMap<QString, QString> prepProc(QString label, QString args);
     static void add_jsonOldProcesses(QMap<QString, QVariant>(*arg)(void));

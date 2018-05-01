@@ -60,7 +60,7 @@ void RawProcessor::executeProcess(QByteArray data)
                 int startOffset = match.capturedStart();
                 int endOffset = match.capturedEnd();
                 resultString = resultString.mid( startOffset, endOffset-startOffset);
-                qDebug()<<resultString;
+                qDebug()<<"[DEBUG] "<<resultString;
                 ///* */qDebug()<<resultString;
             }else{
                 qDebug()<<match.regularExpression().pattern()<<" - "

@@ -1,4 +1,5 @@
 #include "app.h"
+#include <QTextStream>
 #include <QDebug>
 
 int App::jsonOldCount = 0;
@@ -10,12 +11,41 @@ int App::rawCount = 0;
 
 App::App(QObject *parent) : QObject(parent)
 {
+    totalIndex = 0;
+    totalCount = 0;
+
     printer = new Printer("database");
+
+    timer = new QTimer(this);
+    connect(timer, SIGNAL(timeout()), this, SLOT(timeUp()));
 
     QObject::connect( &jsoner, SIGNAL(goResult(QList< QList< QMap<QString, QVariant> > >*, QString)),
              printer, SLOT(getResult(QList< QList< QMap<QString, QVariant> > >*, QString)), Qt::QueuedConnection);
 
     QObject::connect( printer, SIGNAL(pleaseEnd()), this, SLOT(end()), Qt::QueuedConnection);
+}
+void App::timeUp()
+{
+    if(totalIndex < jsonOldCount)
+    {
+        printer->addObjectCounts(1);
+        jsoner.executeProcesses((*jsonOldProcesses[totalIndex])());
+    }else
+    {
+        int indexShiftedOldJson = totalIndex - jsonOldCount;
+        printer->addObjectCounts(1);
+        RawProcessor* processor = new RawProcessor();
+        QObject::connect( processor, SIGNAL(goResult(QList< QList< QMap<QString, QVariant> > >*, QString)),
+                 printer, SLOT(getResult(QList< QList< QMap<QString, QVariant> > >*, QString)), Qt::QueuedConnection);
+        processor->executeProcesses(rawProcesses[indexShiftedOldJson]);
+        rawProcessesToDelete.append(processor);
+    }
+
+    if(totalIndex < (totalCount-1))
+    {
+        totalIndex++;
+    }else
+        totalIndex = 0;
 }
 void App::run()
 {
@@ -69,15 +99,33 @@ void App::run()
     add_rawProcesses(&rawGo_STRAT);
     add_rawProcesses(&rawGo_BTC);
 
-    //GO
-    qDebug()<<"Job started";
-    //execute_jsonOldProcesses();
-    execute_rawProcesses();
+    qDebug()<<"Type 's' for a single all-refresh, type 'a' for an auto-refresh engine start.";
+    QTextStream s(stdin);
+    option = s.readLine().at(0);
+
+    if(QChar('s') == option)
+    {
+        qDebug()<<"Singleshot job started.";
+        execute_jsonOldProcesses();
+        execute_rawProcesses();
+    }else
+    if(QChar('a') == option)
+    {
+        qDebug()<<"Autorefresh job started.";
+        totalCount = jsonOldCount+rawCount;
+        uint32_t toDivide = 10*60/totalCount;
+
+        timer->start(toDivide*1000);
+    }
 }
 void App::end()
 {
-    qDebug()<<"Job finished";
-    emit finished();
+    qDebug()<<"Job finished.";
+    if(QChar('s') == option) emit finished();
+    else{
+        if(!rawProcessesToDelete.isEmpty())
+            for(int i=0;i<1;i++) delete rawProcessesToDelete[i];
+    }
 }
 void App::execute_jsonOldProcesses()
 {
