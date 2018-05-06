@@ -59,8 +59,14 @@ void App::run()
     add_jsonOldProcesses(&prepare_Tradesatoshi);
     add_jsonOldProcesses(&prepare_QBtc);
     add_jsonOldProcesses(&prepare_Exvo);
+    add_jsonOldProcesses(&prepare_Crex24);
+    add_jsonOldProcesses(&prepare_Altex);
+    add_jsonOldProcesses(&prepare_WhatToMine);
+
 
     add_rawProcesses(&rawGoJson_MANI);
+    add_rawProcesses(&rawGo_ZEC);
+
     add_rawProcesses(&rawGo_VEGI);
     add_rawProcesses(&rawGo_SOLACE);
     add_rawProcesses(&rawGo_PLUS1);
@@ -183,6 +189,50 @@ QList< QMap<QString, QString> > App::rawGo_BTC()
     processes.insert(index++, prepProc("text", "height" ));
     processes.insert(index++, prepProc("now", "timedate" ));
     processes.insert(index++, prepProc("reference", "symbol&BTC" ));
+    processes.insert(index++, prepProc("result", ""));
+    //end of editable
+    return processes;
+}
+QList< QMap<QString, QString> > App::rawGoJson_MANI()
+{
+   QList< QMap<QString, QString> > processes;
+    int index = 0;
+    //editable
+    processes.insert(index++, prepProc("name", "MANI"));
+    processes.insert(index++, prepProc("type", "mining"));
+    processes.insert(index++, prepProc("regex", "(MANI)(.*)(},)?"));
+    processes.insert(index++, prepProc("regex", "(hashrate)(.*)(,)?"));
+    processes.insert(index++, prepProc("regex", "[0-9]+(\\.[0-9])*"));
+    processes.insert(index++, prepProc("request", "http://epicpool.net/api/currencies"));
+    processes.insert(index++, prepProc("text", "hashrate" ));
+    processes.insert(index++, prepProc("regex", "(height)(.*)(,)?"));
+    processes.insert(index++, prepProc("regex", "[0-9]+(\\.[0-9])*"));
+    processes.insert(index++, prepProc("text", "height" ));
+    processes.insert(index++, prepProc("now", "timedate" ));
+    processes.insert(index++, prepProc("reference", "symbol&MANI" ));
+    processes.insert(index++, prepProc("result", ""));
+    //end of editable
+    return processes;
+}
+QList< QMap<QString, QString> > App::rawGo_ZEC()
+{
+    QList< QMap<QString, QString> > processes;
+    int index = 0;
+    //editable
+    processes.insert(index++, prepProc("name", "ZEC"));
+    processes.insert(index++, prepProc("type", "mining"));
+    processes.insert(index++, prepProc("regex", "(\"difficulty)(.*)(,)"));
+    processes.insert(index++, prepProc("regex", "[0-9]+(\\.[0-9])*"));
+    processes.insert(index++, prepProc("request", "https://api.zcha.in/v2/mainnet/network"));
+    processes.insert(index++, prepProc("text", "difficulty" ));
+    processes.insert(index++, prepProc("regex", "(blockNumber)(.*)(,)"));
+    processes.insert(index++, prepProc("regex", "[0-9]+(\\.[0-9])*"));
+    processes.insert(index++, prepProc("text", "height" ));
+    processes.insert(index++, prepProc("regex", "(hashrate)(.*)(,)"));
+    processes.insert(index++, prepProc("regex", "[0-9]+(\\.[0-9])*"));
+    processes.insert(index++, prepProc("text", "hashrate" ));
+    processes.insert(index++, prepProc("now", "timedate" ));
+    processes.insert(index++, prepProc("reference", "symbol&ZEC" ));
     processes.insert(index++, prepProc("result", ""));
     //end of editable
     return processes;
@@ -361,23 +411,6 @@ QList< QMap<QString, QString> > App::rawGo_SOLACE()
     processes.insert(index++, prepProc("text", "height" ));
     processes.insert(index++, prepProc("now", "timedate" ));
     processes.insert(index++, prepProc("reference", "symbol&SOLACE" ));
-    processes.insert(index++, prepProc("result", ""));
-    //end of editable
-    return processes;
-}
-QList< QMap<QString, QString> > App::rawGoJson_MANI()
-{
-   QList< QMap<QString, QString> > processes;
-    int index = 0;
-    //editable
-    processes.insert(index++, prepProc("name", "MANI"));
-    processes.insert(index++, prepProc("type", "mining"));
-    processes.insert(index++, prepProc("regex", "(Hash rate:)(.*)(s)"));
-    processes.insert(index++, prepProc("regex", "[0-9]+\\.([0-9])+ .[hH]"));
-    processes.insert(index++, prepProc("request", "http://epicpool.net/api/currencies"));
-    processes.insert(index++, prepProc("text", "hashrate" ));
-    processes.insert(index++, prepProc("now", "timedate" ));
-    processes.insert(index++, prepProc("reference", "symbol&MANI" ));
     processes.insert(index++, prepProc("result", ""));
     //end of editable
     return processes;
@@ -1049,5 +1082,40 @@ QMap<QString, QVariant> App::prepare_StocksExchange()
     processes.insert( "5#functiononly", "array(),variantlistmerge"
     "(market_name|pairName|last&last|vol&vol|ask&sell|bid&buy)" );
     processes.insert( "6#result", "");
+    return processes;
+}
+QMap<QString, QVariant> App::prepare_Crex24()
+{
+    QMap<QString, QVariant> processes;
+    processes.insert( "0#name", "Crex24");
+    processes.insert( "1#type", "exchangeinverted");
+    processes.insert( "2#pretickers", "https://api.crex24.com/CryptoExchangeService/BotPublic/ReturnTicker");
+    processes.insert( "3#functiononly", "valargs(Tickers|non),valarray(),"
+    "variantlist(PairName&pairName|HighPrice&high|LowPrice&low|QuoteVolume&vol|Last&price|Last&last|PercentChange&change),append()" );
+    processes.insert( "4#result", "");
+    return processes;
+}
+QMap<QString, QVariant> App::prepare_Altex()
+{
+    QMap<QString, QVariant> processes;
+    processes.insert( "0#name", "Altex");
+    processes.insert( "1#type", "exchangeinverted");
+    processes.insert( "2#pretickers", "https://api.altex.exchange/v1/ticker");
+    processes.insert( "3#functiononly", "valargs(data|non),"
+    "doctovariant(),objlist(pairName|non|volume&vol|last&price"
+    "),append()" );
+    processes.insert( "4#result", "");
+    return processes;
+}
+QMap<QString, QVariant> App::prepare_WhatToMine()
+{
+    QMap<QString, QVariant> processes;
+    processes.insert( "0#name", "WhatToMine");
+    processes.insert( "1#type", "whattomine");
+    processes.insert( "2#pretickers", "https://whattomine.com/coins.json");
+    processes.insert( "3#functiononly", "valargs(coins|non),"
+    "doctovariant(),objlist(coin_name|non|tag&symbol|algorithm&algorithm|nethash&hashrate|difficulty&difficulty"
+    "|block_reward&reward|last_block&height|block_time&block_time|lagging&lagging),append()" );
+    processes.insert( "4#result", "");
     return processes;
 }

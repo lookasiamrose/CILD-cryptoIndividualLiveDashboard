@@ -50,6 +50,8 @@ private:
     static void add_rawProcesses(QList< QMap<QString, QString> >(*arg)(void));
     void execute_rawProcesses();
 
+    static QMap<QString, QVariant> prepare_WhatToMine();
+
     static QMap<QString, QVariant> prepare_Graviex();
     static QMap<QString, QVariant> prepare_StocksExchange();
     static QMap<QString, QVariant> prepare_Nicehash();
@@ -60,9 +62,12 @@ private:
     static QMap<QString, QVariant> prepare_QBtc();
     static QMap<QString, QVariant> prepare_Exvo();
     static QMap<QString, QVariant> prepare_CryptoCompare();
+    static QMap<QString, QVariant> prepare_Crex24();
+    static QMap<QString, QVariant> prepare_Altex();
 
     static QList< QMap<QString, QString> > rawGoJson_MANI();
 
+    static QList< QMap<QString, QString> > rawGo_ZEC();
     static QList< QMap<QString, QString> > rawGo_VEGI();
     static QList< QMap<QString, QString> > rawGo_SOLACE();
     static QList< QMap<QString, QString> > rawGo_PLUS1();

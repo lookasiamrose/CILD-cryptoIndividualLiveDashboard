@@ -101,6 +101,10 @@ void Printer::getResult(QList< QList< QMap<QString, QVariant> > >* result, QStri
             {
                 insertAndAppendIfNotExist(list, "symbol", "Mining", QString(""), name);
             }
+            if(args.at(1) == "whattomine")
+            {
+                insertAndAppendIfNotExist(list, "symbol", "WhatToMine", QString(""), name);
+            }
         }else{
             qDebug()<<database.lastError().text();
         }
