@@ -59,7 +59,7 @@ Printer::Printer(QString choice, QObject *parent) : Printer(parent)
 }
 void Printer::setupDatabase()
 {
-    QString databasePath = QCoreApplication::applicationDirPath() + QString("/") + QString("database.1.0.0.accdb");
+    QString databasePath = QCoreApplication::applicationDirPath() + QString("/") + QString("database.1.0.5.accdb");
     database = QSqlDatabase::addDatabase("QODBC","connection");
     database.setDatabaseName("DRIVER={Microsoft Access Driver (*.mdb, *.accdb)}; DSN=''; READONLY=FALSE; DBQ=" + databasePath);
 }
