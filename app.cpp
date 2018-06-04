@@ -104,6 +104,29 @@ void App::run()
     add_rawProcesses(&rawGo_DASH);
     add_rawProcesses(&rawGo_STRAT);
     add_rawProcesses(&rawGo_BTC);
+    add_rawProcesses(&rawGo_NBR);
+    add_rawProcesses(&rawGo_LOKI);
+    add_rawProcesses(&rawGo_MKT);
+
+    add_rawProcesses(&rawGoJson_BCN);
+    add_rawProcesses(&rawGoJson_DSH);
+    //add_rawProcesses(&rawGoJson_RD);
+    //add_rawProcesses(&rawGoJson_XDN);
+    add_rawProcesses(&rawGo_MKT);
+    add_rawProcesses(&rawGo_BKC);
+    add_rawProcesses(&rawGoJson_XMR);
+
+    add_rawProcesses(&rawGo_XMV);
+    add_rawProcesses(&rawGo_BBRC);
+    add_rawProcesses(&rawGo_SCRIV);
+    add_rawProcesses(&rawGo_CPR);
+    add_rawProcesses(&rawGo_TRIT);
+    add_rawProcesses(&rawGo_TRKC);
+    add_rawProcesses(&rawGo_ITA);
+    add_rawProcesses(&rawGo_WOW);
+    add_rawProcesses(&rawGo_BZL);
+    add_rawProcesses(&rawGo_BBR);
+    add_rawProcesses(&rawGo_MTN);
 
 
 
@@ -172,6 +195,438 @@ QMap<QString, QString> App::prepProc(QString label, QString args)
     QMap<QString, QString> temp;
     temp.insert(label, args);
     return temp;
+}
+QList< QMap<QString, QString> > App::rawGo_MTN()
+{
+    QList< QMap<QString, QString> > processes;
+    int index = 0;
+    //editable
+    processes.insert(index++, prepProc("name", "MTN"));
+    processes.insert(index++, prepProc("type", "mining"));
+    processes.insert(index++, prepProc("request", "https://explorer.motionproject.org/api/getdifficulty"));
+    processes.insert(index++, prepProc("text", "difficulty" ));
+    processes.insert(index++, prepProc("request", "https://explorer.motionproject.org/api/getnetworkhashps"));
+    processes.insert(index++, prepProc("text", "hashrate" ));
+    processes.insert(index++, prepProc("request", "https://explorer.motionproject.org/api/getblockcount"));
+    processes.insert(index++, prepProc("text", "height" ));
+    processes.insert(index++, prepProc("now", "timedate" ));
+    processes.insert(index++, prepProc("reference", "symbol&MTN" ));
+    processes.insert(index++, prepProc("result", ""));
+    //end of editable
+    return processes;
+}
+QList< QMap<QString, QString> > App::rawGo_BBR()
+{
+    QList< QMap<QString, QString> > processes;
+    int index = 0;
+    //editable
+    processes.insert(index++, prepProc("name", "BBR"));
+    processes.insert(index++, prepProc("type", "mining"));
+    processes.insert(index++, prepProc("request", "http://explorer.mining.blue/q/reward/"));
+    processes.insert(index++, prepProc("text", "reward" ));
+    processes.insert(index++, prepProc("request", "http://explorer.mining.blue/q/hashrate/"));
+    processes.insert(index++, prepProc("text", "hashrate" ));
+    processes.insert(index++, prepProc("request", "http://explorer.mining.blue/q/height/"));
+    processes.insert(index++, prepProc("text", "height" ));
+    processes.insert(index++, prepProc("now", "timedate" ));
+    processes.insert(index++, prepProc("reference", "symbol&BBR" ));
+    processes.insert(index++, prepProc("result", ""));
+    //end of editable
+    return processes;
+}
+QList< QMap<QString, QString> > App::rawGo_BZL()
+{
+    QList< QMap<QString, QString> > processes;
+    int index = 0;
+    //editable
+    processes.insert(index++, prepProc("name", "BZL"));
+    processes.insert(index++, prepProc("type", "mining"));
+    processes.insert(index++, prepProc("request", "https://chainz.cryptoid.info/bzl/api.dws?q=getdifficulty"));
+    processes.insert(index++, prepProc("text", "difficulty" ));
+    processes.insert(index++, prepProc("request", "https://chainz.cryptoid.info/bzl/api.dws?q=nethashps"));
+    processes.insert(index++, prepProc("text", "hashrate" ));
+    processes.insert(index++, prepProc("request", "https://chainz.cryptoid.info/bzl/api.dws?q=getblockcount"));
+    processes.insert(index++, prepProc("text", "height" ));
+    processes.insert(index++, prepProc("now", "timedate" ));
+    processes.insert(index++, prepProc("reference", "symbol&BZL" ));
+    processes.insert(index++, prepProc("result", ""));
+    //end of editable
+    return processes;
+}
+QList< QMap<QString, QString> > App::rawGo_WOW()
+{
+  QList< QMap<QString, QString> > processes;
+    int index = 0;
+    //editable
+    processes.insert(index++, prepProc("name", "WOW"));
+    processes.insert(index++, prepProc("type", "mining"));
+    processes.insert(index++, prepProc("regex", "(Hash rate:)(.*)(s)"));
+    processes.insert(index++, prepProc("regex", "[0-9]+\\.([0-9])+ .[hH]"));
+    processes.insert(index++, prepProc("request", "http://explore.wownero.com/"));
+    processes.insert(index++, prepProc("text", "hashrate" ));
+    processes.insert(index++, prepProc("regex", "(Network difficulty:)(.*)(|)"));
+    processes.insert(index++, prepProc("regex", "[0-9]+(\\.[0-9])*"));
+    processes.insert(index++, prepProc("text", "difficulty" ));
+    processes.insert(index++, prepProc("regex", "(href=./block)(.*)([0-9])+"));
+    processes.insert(index++, prepProc("regex", "[0-9]+(\\.[0-9])*"));
+    processes.insert(index++, prepProc("text", "height" ));
+    processes.insert(index++, prepProc("now", "timedate" ));
+    processes.insert(index++, prepProc("reference", "symbol&WOW" ));
+    processes.insert(index++, prepProc("result", ""));
+    //end of editable
+    return processes;
+}
+QList< QMap<QString, QString> > App::rawGo_ITA()
+{
+  QList< QMap<QString, QString> > processes;
+    int index = 0;
+    //editable
+    processes.insert(index++, prepProc("name", "ITA"));
+    processes.insert(index++, prepProc("type", "mining"));
+    processes.insert(index++, prepProc("regex", "(Hash rate:)(.*)(s)"));
+    processes.insert(index++, prepProc("regex", "[0-9]+\\.([0-9])+ .[hH]"));
+    processes.insert(index++, prepProc("request", "https://explorer.italocoin.com/"));
+    processes.insert(index++, prepProc("text", "hashrate" ));
+    processes.insert(index++, prepProc("regex", "(Network difficulty:)(.*)(|)"));
+    processes.insert(index++, prepProc("regex", "[0-9]+(\\.[0-9])*"));
+    processes.insert(index++, prepProc("text", "difficulty" ));
+    processes.insert(index++, prepProc("regex", "(href=./block)(.*)([0-9])+"));
+    processes.insert(index++, prepProc("regex", "[0-9]+(\\.[0-9])*"));
+    processes.insert(index++, prepProc("text", "height" ));
+    processes.insert(index++, prepProc("now", "timedate" ));
+    processes.insert(index++, prepProc("reference", "symbol&ITA" ));
+    processes.insert(index++, prepProc("result", ""));
+    //end of editable
+    return processes;
+}
+QList< QMap<QString, QString> > App::rawGo_TRKC()
+{
+  QList< QMap<QString, QString> > processes;
+    int index = 0;
+    //editable
+    processes.insert(index++, prepProc("name", "TRKC"));
+    processes.insert(index++, prepProc("type", "mining"));
+    processes.insert(index++, prepProc("regex", "(Hash rate:)(.*)(s)"));
+    processes.insert(index++, prepProc("regex", "[0-9]+\\.([0-9])+ .[hH]"));
+    processes.insert(index++, prepProc("request", "http://explorer.truckcoin.io/"));
+    processes.insert(index++, prepProc("text", "hashrate" ));
+    processes.insert(index++, prepProc("regex", "(Network difficulty:)(.*)(|)"));
+    processes.insert(index++, prepProc("regex", "[0-9]+(\\.[0-9])*"));
+    processes.insert(index++, prepProc("text", "difficulty" ));
+    processes.insert(index++, prepProc("regex", "(href=./block)(.*)([0-9])+"));
+    processes.insert(index++, prepProc("regex", "[0-9]+(\\.[0-9])*"));
+    processes.insert(index++, prepProc("text", "height" ));
+    processes.insert(index++, prepProc("now", "timedate" ));
+    processes.insert(index++, prepProc("reference", "symbol&TRKC" ));
+    processes.insert(index++, prepProc("result", ""));
+    //end of editable
+    return processes;
+}
+QList< QMap<QString, QString> > App::rawGo_TRIT()
+{
+    QList< QMap<QString, QString> > processes;
+    int index = 0;
+    //editable
+    processes.insert(index++, prepProc("name", "TRIT"));
+    processes.insert(index++, prepProc("type", "mining"));
+    processes.insert(index++, prepProc("request", "http://explorer.tritonproject.org/q/reward/"));
+    processes.insert(index++, prepProc("text", "reward" ));
+    processes.insert(index++, prepProc("request", "http://explorer.tritonproject.org/q/hashrate/"));
+    processes.insert(index++, prepProc("text", "hashrate" ));
+    processes.insert(index++, prepProc("request", "http://explorer.tritonproject.org/q/height/"));
+    processes.insert(index++, prepProc("text", "height" ));
+    processes.insert(index++, prepProc("now", "timedate" ));
+    processes.insert(index++, prepProc("reference", "symbol&TRIT" ));
+    processes.insert(index++, prepProc("result", ""));
+    //end of editable
+    return processes;
+}
+QList< QMap<QString, QString> > App::rawGo_CPR()
+{
+    QList< QMap<QString, QString> > processes;
+    int index = 0;
+    //editable
+    processes.insert(index++, prepProc("name", "CPR"));
+    processes.insert(index++, prepProc("type", "mining"));
+    processes.insert(index++, prepProc("request", "https://explorer.cryptorescue.org/api/getdifficulty"));
+    processes.insert(index++, prepProc("text", "difficulty" ));
+    processes.insert(index++, prepProc("request", "https://explorer.cryptorescue.org/api/getnetworkhashps"));
+    processes.insert(index++, prepProc("text", "hashrate" ));
+    processes.insert(index++, prepProc("request", "https://explorer.cryptorescue.org/api/getblockcount"));
+    processes.insert(index++, prepProc("text", "height" ));
+    processes.insert(index++, prepProc("now", "timedate" ));
+    processes.insert(index++, prepProc("reference", "symbol&CPR" ));
+    processes.insert(index++, prepProc("result", ""));
+    //end of editable
+    return processes;
+}
+QList< QMap<QString, QString> > App::rawGo_SCRIV()
+{
+    QList< QMap<QString, QString> > processes;
+    int index = 0;
+    //editable
+    processes.insert(index++, prepProc("name", "SCRIV"));
+    processes.insert(index++, prepProc("type", "mining"));
+    processes.insert(index++, prepProc("request", "https://explorer.scriv.network/api/getdifficulty"));
+    processes.insert(index++, prepProc("text", "difficulty" ));
+    processes.insert(index++, prepProc("request", "https://explorer.scriv.network/api/getnetworkhashps"));
+    processes.insert(index++, prepProc("text", "hashrate" ));
+    processes.insert(index++, prepProc("request", "https://explorer.scriv.network/api/getblockcount"));
+    processes.insert(index++, prepProc("text", "height" ));
+    processes.insert(index++, prepProc("now", "timedate" ));
+    processes.insert(index++, prepProc("reference", "symbol&SCRIV" ));
+    processes.insert(index++, prepProc("result", ""));
+    //end of editable
+    return processes;
+}
+QList< QMap<QString, QString> > App::rawGo_BBRC()
+{
+    QList< QMap<QString, QString> > processes;
+    int index = 0;
+    //editable
+    processes.insert(index++, prepProc("name", "BBRC"));
+    processes.insert(index++, prepProc("type", "mining"));
+    processes.insert(index++, prepProc("request", "https://bbrc-explorer.ciapool.com/get/reward/"));
+    processes.insert(index++, prepProc("text", "reward" ));
+    processes.insert(index++, prepProc("request", "https://bbrc-explorer.ciapool.com/get/hashrate/"));
+    processes.insert(index++, prepProc("text", "hashrate" ));
+    processes.insert(index++, prepProc("request", "https://bbrc-explorer.ciapool.com/get/height/"));
+    processes.insert(index++, prepProc("text", "height" ));
+    processes.insert(index++, prepProc("request", "https://bbrc-explorer.ciapool.com/get/difficulty/"));
+    processes.insert(index++, prepProc("text", "difficulty" ));
+    processes.insert(index++, prepProc("now", "timedate" ));
+    processes.insert(index++, prepProc("reference", "symbol&BBRC" ));
+    processes.insert(index++, prepProc("result", ""));
+    //end of editable
+    return processes;
+}
+QList< QMap<QString, QString> > App::rawGo_XMV()
+{
+  QList< QMap<QString, QString> > processes;
+    int index = 0;
+    //editable
+    processes.insert(index++, prepProc("name", "XMV"));
+    processes.insert(index++, prepProc("type", "mining"));
+    processes.insert(index++, prepProc("regex", "(Hash rate:)(.*)(s)"));
+    processes.insert(index++, prepProc("regex", "[0-9]+\\.([0-9])+ .[hH]"));
+    processes.insert(index++, prepProc("request", "https://monerovexplorer.com/"));
+    processes.insert(index++, prepProc("text", "hashrate" ));
+    processes.insert(index++, prepProc("regex", "(Network difficulty:)(.*)(|)"));
+    processes.insert(index++, prepProc("regex", "[0-9]+(\\.[0-9])*"));
+    processes.insert(index++, prepProc("text", "difficulty" ));
+    processes.insert(index++, prepProc("regex", "(href=./block)(.*)([0-9])+"));
+    processes.insert(index++, prepProc("regex", "[0-9]+(\\.[0-9])*"));
+    processes.insert(index++, prepProc("text", "height" ));
+    processes.insert(index++, prepProc("now", "timedate" ));
+    processes.insert(index++, prepProc("reference", "symbol&XMV" ));
+    processes.insert(index++, prepProc("result", ""));
+    //end of editable
+    return processes;
+}
+QList< QMap<QString, QString> > App::rawGoJson_XDN()
+{
+   QList< QMap<QString, QString> > processes;
+    int index = 0;
+    //editable
+    processes.insert(index++, prepProc("name", "XDN"));
+    processes.insert(index++, prepProc("type", "mining"));
+    //processes.insert(index++, prepProc("regex", "(MANI)(.*)(},)?"));
+    processes.insert(index++, prepProc("regex", "(instantHashrate)(.*)(,)?"));
+    processes.insert(index++, prepProc("regex", "[0-9]+(\\.[0-9])*"));
+    processes.insert(index++, prepProc("request", "https://chainradar.com/api/v1/xdn/status"));
+    processes.insert(index++, prepProc("text", "hashrate" ));
+    processes.insert(index++, prepProc("regex", "(height)(.*)(,)?"));
+    processes.insert(index++, prepProc("regex", "[0-9]+(\\.[0-9])*"));
+    processes.insert(index++, prepProc("text", "height" ));
+    processes.insert(index++, prepProc("regex", "(reward)(.*)(,)?"));
+    processes.insert(index++, prepProc("regex", "[0-9]+(\\.[0-9])*"));
+    processes.insert(index++, prepProc("text", "reward" ));
+    processes.insert(index++, prepProc("now", "timedate" ));
+    processes.insert(index++, prepProc("reference", "symbol&XDN" ));
+    processes.insert(index++, prepProc("result", ""));
+    //end of editable
+    return processes;
+}
+QList< QMap<QString, QString> > App::rawGoJson_XMR()
+{
+   QList< QMap<QString, QString> > processes;
+    int index = 0;
+    //editable
+    processes.insert(index++, prepProc("name", "XMR"));
+    processes.insert(index++, prepProc("type", "mining"));
+    //processes.insert(index++, prepProc("regex", "(MANI)(.*)(},)?"));
+    processes.insert(index++, prepProc("regex", "(hashrate)(.*)(,)?"));
+    processes.insert(index++, prepProc("regex", "[0-9]+(\\.[0-9])*"));
+    processes.insert(index++, prepProc("request", "https://moneroblocks.info/api/get_stats"));
+    processes.insert(index++, prepProc("text", "hashrate" ));
+    processes.insert(index++, prepProc("regex", "(height)(.*)(,)?"));
+    processes.insert(index++, prepProc("regex", "[0-9]+(\\.[0-9])*"));
+    processes.insert(index++, prepProc("text", "height" ));
+    processes.insert(index++, prepProc("regex", "(last_reward)(.*)(,)?"));
+    processes.insert(index++, prepProc("regex", "[0-9]+(\\.[0-9])*"));
+    processes.insert(index++, prepProc("text", "reward" ));
+    processes.insert(index++, prepProc("regex", "(difficulty)(.*)(,)?"));
+    processes.insert(index++, prepProc("regex", "[0-9]+(\\.[0-9])*"));
+    processes.insert(index++, prepProc("text", "difficulty" ));
+    processes.insert(index++, prepProc("now", "timedate" ));
+    processes.insert(index++, prepProc("reference", "symbol&XMR" ));
+    processes.insert(index++, prepProc("result", ""));
+    //end of editable
+    return processes;
+}
+QList< QMap<QString, QString> > App::rawGo_BKC()
+{
+    QList< QMap<QString, QString> > processes;
+    int index = 0;
+    //editable
+    processes.insert(index++, prepProc("name", "BKC"));
+    processes.insert(index++, prepProc("type", "mining"));
+    processes.insert(index++, prepProc("request", "http://explorer.balkancoin.org/q/reward/"));
+    processes.insert(index++, prepProc("text", "reward" ));
+    processes.insert(index++, prepProc("request", "http://explorer.balkancoin.org/q/hashrate/"));
+    processes.insert(index++, prepProc("text", "hashrate" ));
+    processes.insert(index++, prepProc("request", "http://explorer.balkancoin.org/q/height/"));
+    processes.insert(index++, prepProc("text", "height" ));
+    processes.insert(index++, prepProc("now", "timedate" ));
+    processes.insert(index++, prepProc("reference", "symbol&BKC" ));
+    processes.insert(index++, prepProc("result", ""));
+    //end of editable
+    return processes;
+}
+QList< QMap<QString, QString> > App::rawGoJson_RD()
+{
+   QList< QMap<QString, QString> > processes;
+    int index = 0;
+    //editable
+    processes.insert(index++, prepProc("name", "RD"));
+    processes.insert(index++, prepProc("type", "mining"));
+    //processes.insert(index++, prepProc("regex", "(MANI)(.*)(},)?"));
+    processes.insert(index++, prepProc("regex", "(instantHashrate)(.*)(,)?"));
+    processes.insert(index++, prepProc("regex", "[0-9]+(\\.[0-9])*"));
+    processes.insert(index++, prepProc("request", "https://chainradar.com/api/v1/rd/status"));
+    processes.insert(index++, prepProc("text", "hashrate" ));
+    processes.insert(index++, prepProc("regex", "(height)(.*)(,)?"));
+    processes.insert(index++, prepProc("regex", "[0-9]+(\\.[0-9])*"));
+    processes.insert(index++, prepProc("text", "height" ));
+    processes.insert(index++, prepProc("regex", "(reward)(.*)(,)?"));
+    processes.insert(index++, prepProc("regex", "[0-9]+(\\.[0-9])*"));
+    processes.insert(index++, prepProc("text", "reward" ));
+    processes.insert(index++, prepProc("now", "timedate" ));
+    processes.insert(index++, prepProc("reference", "symbol&RD" ));
+    processes.insert(index++, prepProc("result", ""));
+    //end of editable
+    return processes;
+}
+QList< QMap<QString, QString> > App::rawGoJson_DSH()
+{
+   QList< QMap<QString, QString> > processes;
+    int index = 0;
+    //editable
+    processes.insert(index++, prepProc("name", "DSH"));
+    processes.insert(index++, prepProc("type", "mining"));
+    //processes.insert(index++, prepProc("regex", "(MANI)(.*)(},)?"));
+    processes.insert(index++, prepProc("regex", "(instantHashrate)(.*)(,)?"));
+    processes.insert(index++, prepProc("regex", "[0-9]+(\\.[0-9])*"));
+    processes.insert(index++, prepProc("request", "https://chainradar.com/api/v1/dsh/status"));
+    processes.insert(index++, prepProc("text", "hashrate" ));
+    processes.insert(index++, prepProc("regex", "(height)(.*)(,)?"));
+    processes.insert(index++, prepProc("regex", "[0-9]+(\\.[0-9])*"));
+    processes.insert(index++, prepProc("text", "height" ));
+    processes.insert(index++, prepProc("regex", "(reward)(.*)(,)?"));
+    processes.insert(index++, prepProc("regex", "[0-9]+(\\.[0-9])*"));
+    processes.insert(index++, prepProc("text", "reward" ));
+    processes.insert(index++, prepProc("now", "timedate" ));
+    processes.insert(index++, prepProc("reference", "symbol&DSH" ));
+    processes.insert(index++, prepProc("result", ""));
+    //end of editable
+    return processes;
+}
+QList< QMap<QString, QString> > App::rawGoJson_BCN()
+{
+   QList< QMap<QString, QString> > processes;
+    int index = 0;
+    //editable
+    processes.insert(index++, prepProc("name", "BCN"));
+    processes.insert(index++, prepProc("type", "mining"));
+    //processes.insert(index++, prepProc("regex", "(MANI)(.*)(},)?"));
+    processes.insert(index++, prepProc("regex", "(instantHashrate)(.*)(,)?"));
+    processes.insert(index++, prepProc("regex", "[0-9]+(\\.[0-9])*"));
+    processes.insert(index++, prepProc("request", "https://chainradar.com/api/v1/bcn/status"));
+    processes.insert(index++, prepProc("text", "hashrate" ));
+    processes.insert(index++, prepProc("regex", "(height)(.*)(,)?"));
+    processes.insert(index++, prepProc("regex", "[0-9]+(\\.[0-9])*"));
+    processes.insert(index++, prepProc("text", "height" ));
+    processes.insert(index++, prepProc("regex", "(reward)(.*)(,)?"));
+    processes.insert(index++, prepProc("regex", "[0-9]+(\\.[0-9])*"));
+    processes.insert(index++, prepProc("text", "reward" ));
+    processes.insert(index++, prepProc("now", "timedate" ));
+    processes.insert(index++, prepProc("reference", "symbol&BCN" ));
+    processes.insert(index++, prepProc("result", ""));
+    //end of editable
+    return processes;
+}
+QList< QMap<QString, QString> > App::rawGo_MKT()
+{
+   QList< QMap<QString, QString> > processes;
+    int index = 0;
+    //editable
+    processes.insert(index++, prepProc("name", "MKT"));
+    processes.insert(index++, prepProc("type", "mining"));
+    processes.insert(index++, prepProc("request", "http://explorer.marketcash.io/api_get/difficulty/"));
+    processes.insert(index++, prepProc("text", "difficulty" ));
+    processes.insert(index++, prepProc("request", "http://explorer.marketcash.io/api_get/hashrate/"));
+    processes.insert(index++, prepProc("text", "hashrate" ));
+    processes.insert(index++, prepProc("request", "http://explorer.marketcash.io/api_get/height/"));
+    processes.insert(index++, prepProc("text", "height" ));
+    processes.insert(index++, prepProc("request", "http://explorer.marketcash.io/api_get/reward/"));
+    processes.insert(index++, prepProc("text", "reward" ));
+    processes.insert(index++, prepProc("now", "timedate" ));
+    processes.insert(index++, prepProc("reference", "symbol&MKT" ));
+    processes.insert(index++, prepProc("result", ""));
+    //end of editable
+    return processes;
+}
+QList< QMap<QString, QString> > App::rawGo_LOKI()
+{
+  QList< QMap<QString, QString> > processes;
+    int index = 0;
+    //editable
+    processes.insert(index++, prepProc("name", "LOKI"));
+    processes.insert(index++, prepProc("type", "mining"));
+    processes.insert(index++, prepProc("regex", "(Hash rate:)(.*)(s)"));
+    processes.insert(index++, prepProc("regex", "[0-9]+\\.([0-9])+ .[hH]"));
+    processes.insert(index++, prepProc("request", "https://lokiblocks.com/"));
+    processes.insert(index++, prepProc("text", "hashrate" ));
+    processes.insert(index++, prepProc("regex", "(Network Difficulty:)(.*)(|)"));
+    processes.insert(index++, prepProc("regex", "[0-9,]+(\\.[0-9])*"));
+    processes.insert(index++, prepProc("text", "difficulty" ));
+    processes.insert(index++, prepProc("regex", "(href=./block)(.*)([0-9])+"));
+    processes.insert(index++, prepProc("regex", "[0-9]+(\\.[0-9])*"));
+    processes.insert(index++, prepProc("text", "height" ));
+    processes.insert(index++, prepProc("now", "timedate" ));
+    processes.insert(index++, prepProc("reference", "symbol&LOKI" ));
+    processes.insert(index++, prepProc("result", ""));
+    //end of editable
+    return processes;
+}
+QList< QMap<QString, QString> > App::rawGo_NBR()
+{
+    QList< QMap<QString, QString> > processes;
+    int index = 0;
+    //editable
+    processes.insert(index++, prepProc("name", "NBR"));
+    processes.insert(index++, prepProc("type", "mining"));
+    processes.insert(index++, prepProc("request", "http://explorer.niobiocash.com/q/reward/"));
+    processes.insert(index++, prepProc("text", "reward" ));
+    processes.insert(index++, prepProc("request", "http://explorer.niobiocash.com/q/hashrate/"));
+    processes.insert(index++, prepProc("text", "hashrate" ));
+    processes.insert(index++, prepProc("request", "http://explorer.niobiocash.com/q/height/"));
+    processes.insert(index++, prepProc("text", "height" ));
+    processes.insert(index++, prepProc("now", "timedate" ));
+    processes.insert(index++, prepProc("reference", "symbol&NBR" ));
+    processes.insert(index++, prepProc("result", ""));
+    //end of editable
+    return processes;
 }
 QList< QMap<QString, QString> > App::rawGo_BTC()
 {

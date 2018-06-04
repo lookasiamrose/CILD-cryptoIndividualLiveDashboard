@@ -105,6 +105,28 @@ private:
     static QList< QMap<QString, QString> > rawGo_DASH();
     static QList< QMap<QString, QString> > rawGo_STRAT();
     static QList< QMap<QString, QString> > rawGo_BTC();
+    static QList< QMap<QString, QString> > rawGo_NBR();
+    static QList< QMap<QString, QString> > rawGo_LOKI();
+    static QList< QMap<QString, QString> > rawGo_MKT();
+    static QList< QMap<QString, QString> > rawGoJson_BCN();
+    static QList< QMap<QString, QString> > rawGoJson_DSH();
+    static QList< QMap<QString, QString> > rawGoJson_RD();
+    static QList< QMap<QString, QString> > rawGo_BKC();
+    static QList< QMap<QString, QString> > rawGoJson_XMR();
+    static QList< QMap<QString, QString> > rawGoJson_XDN();
+    static QList< QMap<QString, QString> > rawGo_XMV();
+    static QList< QMap<QString, QString> > rawGo_BBRC();
+    static QList< QMap<QString, QString> > rawGo_SCRIV();
+    static QList< QMap<QString, QString> > rawGo_CPR();
+    static QList< QMap<QString, QString> > rawGo_TRIT();
+    static QList< QMap<QString, QString> > rawGo_TRKC();
+    static QList< QMap<QString, QString> > rawGo_ITA();
+    static QList< QMap<QString, QString> > rawGo_WOW();
+    static QList< QMap<QString, QString> > rawGo_BZL();
+    static QList< QMap<QString, QString> > rawGo_BBR();
+    static QList< QMap<QString, QString> > rawGo_MTN();
+
+
 };
 
 #endif // APP_H
