@@ -60,10 +60,10 @@ void RawProcessor::executeProcess(QByteArray data)
                 int startOffset = match.capturedStart();
                 int endOffset = match.capturedEnd();
                 resultString = resultString.mid( startOffset, endOffset-startOffset);
-                qDebug()<<"[DEBUG] "<<resultString;
+                //qDebug()<<"[DEBUG] "<<resultString;
                 ///* */qDebug()<<resultString;
             }else{
-                qDebug()<<match.regularExpression().pattern()<<" - "
+                qDebug()<<"[DEBUG] "<<match.regularExpression().pattern()<<" - "
                         <<match.regularExpression().errorString();
             }
             regexs.pop_front();

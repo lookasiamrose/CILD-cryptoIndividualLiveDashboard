@@ -49,10 +49,10 @@ void App::timeUp()
 }
 void App::run()
 {
+    add_jsonOldProcesses(&prepare_Nicehash);
     add_jsonOldProcesses(&prepare_CryptoCompare);
     add_jsonOldProcesses(&prepare_Graviex);
     add_jsonOldProcesses(&prepare_StocksExchange);
-    add_jsonOldProcesses(&prepare_Nicehash);
     add_jsonOldProcesses(&prepare_Tradeogre);
     add_jsonOldProcesses(&prepare_Cryptopia);
     add_jsonOldProcesses(&prepare_Octaex);
@@ -133,6 +133,16 @@ void App::run()
     qDebug()<<"Type 's' for a single all-refresh, type 'a' for an auto-refresh engine start.";
     QTextStream s(stdin);
     option = s.readLine().at(0);
+
+    qDebug()<<"Clear tables while refreshing (recommended)? y/n";
+    QTextStream s2(stdin);
+    QChar removable = s2.readLine().at(0);
+
+    if(QChar('y') == removable)
+    {
+        printer->setRemove(true);
+        qDebug()<<"Tables clearing set to TRUE.";
+    }
 
     if(QChar('s') == option)
     {
