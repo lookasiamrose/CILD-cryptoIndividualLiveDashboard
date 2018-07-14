@@ -131,7 +131,6 @@ void Printer::getResult(QList< QList< QMap<QString, QVariant> > >* result, QStri
                 toPurge.append("reward");
                 toPurge.append("difficulty");
                 purgeList(list,toPurge,"value");
-                pushWithHashes(list, args.at(0));
                 insertAndAppendIfNotExist(list, "symbol", "Mining", QString(""), name);
             }else
             if(args.at(1) == "whattomine")

@@ -64,6 +64,7 @@ private:
     static QMap<QString, QVariant> prepare_CryptoCompare();
     static QMap<QString, QVariant> prepare_Crex24();
     static QMap<QString, QVariant> prepare_Altex();
+    static QMap<QString, QVariant> prepare_SouthExchange();
 
     static QList< QMap<QString, QString> > rawGoJson_MANI();
 
@@ -124,8 +125,22 @@ private:
     static QList< QMap<QString, QString> > rawGo_WOW();
     static QList< QMap<QString, QString> > rawGo_BZL();
     static QList< QMap<QString, QString> > rawGo_BBR();
-    static QList< QMap<QString, QString> > rawGo_MTN();
-
+    static QList< QMap<QString, QString> > rawGo_XMN();
+    static QList< QMap<QString, QString> > rawGo_BTX();
+    static QList< QMap<QString, QString> > rawGo_KEC();
+    static QList< QMap<QString, QString> > rawGo_KONA();
+    static QList< QMap<QString, QString> > rawGo_SAS();
+    static QList< QMap<QString, QString> > rawGo_HARC();
+    static QList< QMap<QString, QString> > rawGo_ZOC();
+    static QList< QMap<QString, QString> > rawGo_TRIONE();
+    static QList< QMap<QString, QString> > rawGo_GDM();
+    static QList< QMap<QString, QString> > rawGo_BRAZ();
+    static QList< QMap<QString, QString> > rawGo_B2N();
+    static QList< QMap<QString, QString> > rawGo_XRN();
+    static QList< QMap<QString, QString> > rawGo_PURK();
+    static QList< QMap<QString, QString> > rawGo_BUEN();
+    static QList< QMap<QString, QString> > rawGo_CRC();
+    static QList< QMap<QString, QString> > rawGo_XMC();
 
 };
 
